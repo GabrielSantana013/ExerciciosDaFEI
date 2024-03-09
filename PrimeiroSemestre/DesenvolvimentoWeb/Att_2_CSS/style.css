@@ -1,0 +1,71 @@
+
+.historiacbj{
+    float:left;
+    font-size: 16px;
+    text-align: justify;
+    margin-right: auto;
+    max-width: 600px;
+}
+
+#linksiniciais{
+    text-align: center;
+    font-size: 20px;
+    background-color: yellow;
+}
+
+h2{
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+}
+
+#capadabanca{
+    float:right;
+    width: 600px;
+    height: 250px; 
+    box-sizing:border-box;
+    margin-bottom: 40px;
+    border: 2px solid black;
+}
+
+#transpiracao{
+    float:right;
+    width: 300px;
+    height: 250px;
+    box-sizing:border-box;
+    margin-bottom: 40px;
+    border: 2px solid black;
+}
+
+#quintafeira{
+    float:right;
+    width: 300px;
+    height: 250px; 
+    box-sizing: border-box;
+    margin-left: 10px;
+    margin-bottom: 40px;
+    border: 2px solid black;
+}
+
+#pcpl{
+    float:right;
+    width: 300px;
+    height: 250px;
+    box-sizing:border-box;
+    border: 2px solid black;
+}
+
+#zoiodelula{
+
+    float:right;
+    width: 300px;
+    height: 250px; 
+    box-sizing: border-box;
+    margin-left: 10px;
+    margin-bottom: 40px;
+    border: 2px solid black;
+
+}
+
