@@ -1,0 +1,48 @@
+#blocoInicial{
+
+    display: flex;
+    justify-content: center;
+
+}
+
+#botao{
+    position: absolute;
+    margin-top:25px;
+}
+
+#blocoResposta{
+
+    display: flex;
+    justify-content: center;
+    margin:0px 500px 0px 500px;
+    border: solid black 2px;
+}
+
+#maiorQ{
+
+    background-color: gray;  
+}
+
+#menorQ{
+
+background-color: gray;
+
+
+}
+
+#resposta{
+
+    font-size:20px;
+}
+
+body{
+    background-color:skyblue;
+}
+
+#blocoMeio{
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+}
