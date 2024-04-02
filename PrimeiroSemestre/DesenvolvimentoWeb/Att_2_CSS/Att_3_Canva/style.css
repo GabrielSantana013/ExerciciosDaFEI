@@ -1,0 +1,18 @@
+body{
+
+    background-color: skyblue;
+}
+
+#pintura{
+
+    border: solid 1px black;
+    background-color: white;
+    
+}
+
+#container_canva{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
