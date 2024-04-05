@@ -82,7 +82,9 @@ desenhar_arco(150,300,40,0,2*Math.PI,"green","cyan");
 
 //arcos
 
-desenhar_arco(150,150,50,Math.PI,2*Math.PI, "cyan","white");
+desenhar_arco(150,150,65,2*Math.PI,Math.PI, "green","rgba(0,0,0,0)");
+desenhar_arco(150,150,85,2*Math.PI,1.75*Math.PI, "green","rgba(0,0,0,0)");
+desenhar_arco(150,150,85,1.25*Math.PI,Math.PI, "green","rgba(0,0,0,0)");
 
-
-
+desenhar_arco(150,300,70,1.5*Math.PI,Math.PI, "green","rgba(0,0,0,0)");
+desenhar_arco(150,300,55,2*Math.PI,1.5*Math.PI, "green","rgba(0,0,0,0)");
