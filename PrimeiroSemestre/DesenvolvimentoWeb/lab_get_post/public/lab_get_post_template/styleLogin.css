@@ -1,0 +1,19 @@
+body{
+    background-color:skyblue;
+    width: 100%;
+
+}
+
+h1{
+    text-align: center;
+
+}
+#containerCadastro > form {
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+p{
+    text-align: center;
+}

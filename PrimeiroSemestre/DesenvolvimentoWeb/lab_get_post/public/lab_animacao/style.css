@@ -1,0 +1,18 @@
+body{
+    background-color: skyblue
+}
+
+#containerCanvas{
+    display: flex;
+    justify-content: center;
+}
+
+
+#animacao{
+background-color:white;
+
+}
+
+#titulo{
+    text-align: center;
+}
