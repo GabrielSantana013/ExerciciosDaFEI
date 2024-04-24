@@ -34,7 +34,7 @@ app.post("/cadastra", function(requisicao, resposta)
     password = requisicao.body.password;
     let mensagem = `Cadastrado com sucesso!`
     //console.log(user+password);
-    resposta.render(`resposta.ejs`, {mensagem});
+    resposta.render(`cadastro.ejs`, {mensagem});
 })
 
 app.post("/login", function(requisicao, resposta)
@@ -45,7 +45,6 @@ app.post("/login", function(requisicao, resposta)
     if(usuario === user && senha === password)
     {
         let mensagem = `Sucesso!`;
-
         //console.log(`Sucesso!\nUsuário:${usuario}`);
         
         resposta.render(`resposta.ejs`, {mensagem, usuario} );
