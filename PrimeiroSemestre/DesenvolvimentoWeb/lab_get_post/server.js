@@ -3,6 +3,10 @@ var http = require('http');
 var express = require('express');
 var bodyParser = require("body-parser");
 
+const MongoClient = require("mongodb").MongoClient;
+const url = `mongodb+srv://gDias:guguinha14@gsantana.sbnjkdr.mongodb.net/?retryWrites=true&w=majority&appName=GSantana`
+const client = new MongoClient(url, {useNewUrlParser: true});
+
 //variável app que acessará todos os métodos/funções no framework express
 var app = express();
 app.use(bodyParser.urlencoded({extended: false})); // necessario pra usar post
@@ -63,4 +67,40 @@ app.get("/", function(requisicao, resposta)
     resposta.redirect("Project.html")
 })
 
+app.post("/cadastrar_usuario", function(requisicao, resposta)
+{
+    client.db("GSantana").collection("usuarios").insertOne(
+        { db_nome: requisicao.body.nome, 
+            db_login: requisicao.body.login,
+            db_senha: requisicao.body.senha 
 
+        },
+        function (err) {
+        if (err) {
+          resposta.render('resposta', {mensagem: "Erro ao cadastrar usuário!"})
+        }else {
+          resposta.render('resposta', {mensagem: "Usuário cadastrado com sucesso!"})       
+        };
+      });
+});
+
+
+app.post("/logar_usuario", function(requisicao, resposta) {
+
+    // busca um usuário no banco de dados
+    client.db("GSantana").collection("usuarios").find(
+      {db_login: requisicao.body.login,
+        db_senha: requisicao.body.senha
+     }).toArray(function(err, items) {
+        console.log(items);
+        if (items.length == 0) {
+          resposta.render('resposta', {mensagem: "Usuário/senha não encontrado!"})
+        }else if (err) {
+          resposta.render('resposta', {mensagem: "Erro ao logar usuário!"})
+        }else {
+          resposta.render('resposta', {mensagem: "Usuário logado com sucesso!"})       
+        };
+      });
+ 
+ });
+ 
