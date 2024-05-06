@@ -73,7 +73,6 @@ app.post("/cadastrar_usuario", function(requisicao, resposta)
         { db_nome: requisicao.body.nome, 
             db_login: requisicao.body.login,
             db_senha: requisicao.body.senha 
-
         },
         function (err) {
         if (err) {
@@ -103,4 +102,41 @@ app.post("/logar_usuario", function(requisicao, resposta) {
       });
  
  });
+
+
+ app.post("/atualizarSenha", function(req, resp) {
+
+  // atualiza senha do usuário
+  client.db("GSantana").collection("usuarios").updateOne(
+      { db_login: req.body.login, db_senha: req.body.senhaAtual },
+      { $set: {db_senha: req.body.novaSenha} }, function (err, result) {
+        console.log(result);
+        if (result.modifiedCount == 0) {
+          resp.render('respostaNovaSenha', {mensagem: "Usuário/senha não encontrado!"})
+        }else if (err) {
+          resp.render('respostaNovaSenha', {mensagem: "Erro ao atualizar usuário!"})
+        }else {
+          resp.render('respostaNovaSenha', {mensagem: "Usuário atualizado com sucesso!"})       
+        };
+  });
+
+});
+
+
+  app.post("/removerUsuario", function(req, resp) {
+
+    // remove do usuário
+    client.db("GSantana").collection("usuarios").deleteOne(
+      { db_login: req.body.login, db_senha: req.body.senhaAtual } , function (err, result) {
+        console.log(result);
+        if (result.deletedCount == 0) {
+          resp.render('resposta', {mensagem: "Usuário/senha não encontrado!"})
+        }else if (err) {
+          resp.render('resposta', {mensagem: "Erro ao remover usuário!"})
+        }else {
+          resp.render('resposta', {mensagem: "Usuário removido com sucesso!"})       
+        };
+      });
  
+ });
+
