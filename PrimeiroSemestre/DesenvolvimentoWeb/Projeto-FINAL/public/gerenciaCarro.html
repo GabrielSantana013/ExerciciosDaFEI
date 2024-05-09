@@ -8,19 +8,14 @@
     <link href="styleGerenciaCarro.css" rel="stylesheet">
 </head>
 <body>
-    
-    <div id="containerImagem">
-        <img id = "imagem" src = imagens/fotoCarro.png>
-    </div>
 
-    <div id = containerCadastro>
-        <form action="/cadastrar_carro" method="post">
-            Marca:<input type="text" name="marca">
-            Modelo:<input type="text" name="modelo">
-            Ano:<input type="text" name="ano">
-            Quantidade:<input type="number" name="qtde_disponivel">
-            <input type="submit" value="Cadastrar Veículo">
-        </form>
+    <h1>Gerenciar Carros:</h1>
+    <div id = "containerOpcoes">
+        <ul>
+            <li><a href="cadastrarCarros.html">Cadastrar</a> novo carro</li>
+            <li><a href="excluirCarros.html">Remover</a> carro</li>
+            <li><a href="atualizarCarros.html">Atualizar</a> carro</li>
+        </ul>
     </div>
     
 </body>

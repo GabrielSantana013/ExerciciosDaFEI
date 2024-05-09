@@ -5,24 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Loja de Carros</title>
+    <link href="styleRespostaLogin.css" rel="stylesheet">
 </head>
 <body>
     <h1>Resposta</h1>
     <%=mensagem%>
-    <h2>Super Loja</h2>
+
+    <div id = "links">
+        <a href="loginLoja.html">Login</a>
+        <a href="cadastroLoja.html">Cadastro</a>
+    </div>
+
+    <h2 id = "tituloLoja">Super Loja</h2>
 
     <%if (carros && carros.length > 0) {%>
     <%for(let i = 0; i < carros.length; i++){ %>
         
         <div id="containerCarros">
-            <h2>Marca: <%=carros[i].db_marca%></h2>
-                <h3>Modelo:<%=carros[i].db_modelo%></h3>
-                <h3>Ano:<%=carros[i].db_ano%></h3>
-                <h3>Quantidade em estoque:<%=carros[i].db_qtde_disponivel%></h3>
+            <h2>Marca:<%=carros[i].db_marca%></h2>
+            <ul>
+               <li>Modelo:<%=carros[i].db_modelo%></li>
+               <li>Ano:<%=carros[i].db_ano%></li>
+               <li>Quantidade em estoque:<%=carros[i].db_qtde_disponivel%></li>
+            </ul>
+            <%if (carros[i].db_qtde_disponivel > 0) {%>
+                <form action="/comprar_carro" method="post">
+                    <input type="hidden" value="<%=carros[i].db_modelo%>" name = "modelo">
+                    <input type="hidden" value="<%=carros[i].db_ano%>" name = "ano">
+                    <input type="hidden" value="<%=carros[i].db_marca%>" name = "marca"> 
+                    <input type="submit" value="Comprar Carro">
+                </form>
+                <%} else {%>
+                    <p>Carro esgotado</p>
+                <% }%>
         </div>
         <%}%>
     <%}%>
     
-    <h3>Clique <a href="gerenciaCarro.html">aqui</a> para cadastrar carros</h3>
+    <h3 id = "cadastrarCarros">Clique <a href="gerenciaCarro.html">aqui</a> para gerenciar os carros</h3>
 </body>
 </html>

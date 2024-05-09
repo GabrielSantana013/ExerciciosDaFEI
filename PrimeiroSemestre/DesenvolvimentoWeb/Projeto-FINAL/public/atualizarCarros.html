@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Carros</title>
+    <link href="styleExcluirCarros.css" rel="stylesheet">
+</head>
+<body>
+
+    <h1>Atualiza Carros</h1>
+    <div id = "containerExcluirCarros">
+        <form action="/atualiza_carros" method="post">
+            Marca:<input type="text" name="marca">
+            Modelo:<input type="text" name="modelo">
+            Ano:<input type="text" name="ano">
+            Quantidade:<input type="number" name="qtde_disponivel">
+            
+            Nova Marca:<input type="text" name="novaMarca">
+            Novo Modelo:<input type="text" name="novoModelo">
+            Novo Ano:<input type="text" name="novoAno">
+            Nova Quantidade:<input type="number" name="novaQtde">
+            <input type="submit" value="Atualizar Veículo">
+        </form>
+    </div>
+</body>
+</html>

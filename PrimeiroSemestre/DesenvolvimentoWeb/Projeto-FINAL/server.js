@@ -66,11 +66,15 @@ app.post("/logar_usuario", function(req,res){
             db_login: req.body.login,
             db_senha: req.body.senha
         },
-        function(err)
+        function(err, usuarioEncontrado)
         {
             if(err)
             {
-                res.render('repostaErro', {mensagem: "Usuário/senha não encontrado!"})
+                res.render('respostaErro', {mensagem: "Usuário/senha não encontrado!"})
+            }
+            else if(!usuarioEncontrado)
+            {
+                res.render('respostaErro', { mensagem: "Usuário/senha não encontrado!" });
             }
             else
             {
@@ -104,6 +108,93 @@ app.post("/cadastrar_carro", function(req,res){
             }
         });
 });
+
+app.post("/excluir_carros", function(req, res){
+      client.db("GSantana").collection("carros").deleteOne(
+        {
+          db_marca: req.body.marca,
+          db_modelo: req.body.modelo,
+          db_ano: req.body.ano
+        },
+        function(err, result)
+        {
+          if(result.deletedCount == 0)
+            {
+              client.db("GSantana").collection("carros").find().toArray(function(err, itens){
+                res.render('respostaLogin', {mensagem:"Veículo não encontrado!", carros:itens})
+              })
+            }
+          else if(err)
+            {
+              client.db("GSantana").collection("carros").find().toArray(function(err, itens){
+                res.render('respostaLogin', {mensagem:"Erro ao excluir o veículo", carros:itens})
+              })
+            }
+          else
+          {
+            client.db("GSantana").collection("carros").find().toArray(function(err, itens){
+              res.render('respostaLogin', {mensagem:"Veículo excluído com sucesso!", carros:itens})
+            })
+          }
+    });
+});
+
+
+
+app.post("/atualiza_carros", function(req, resp) {
+
+  client.db("GSantana").collection("carros").updateOne(
+      { db_marca: req.body.marca,
+        db_modelo: req.body.modelo,
+        db_ano: req.body.ano,
+        db_qtde_disponivel: req.body.qtde_disponivel
+      },
+      { $set: 
+        {db_marca: req.body.novaMarca,
+          db_modelo: req.body.novoModelo,
+          db_ano: req.body.novoAno,
+          db_qtde_disponivel: req.body.novaQtde,
+        }
+      }, function (err, result) {
+        if (result.modifiedCount == 0) {
+          client.db("GSantana").collection("carros").find().toArray(function(err,itens){
+            resp.render('respostaLogin', {mensagem: "Carro não encontrado!",carros:itens})
+          })
+        }else if (err) {
+          client.db("GSantana").collection("carros").find().toArray(function(err,itens){
+            resp.render('respostaLogin', {mensagem: "Carro não encontrado!",carros:itens})
+          })
+        }else {
+          client.db("GSantana").collection("carros").find().toArray(function(err, itens){
+          resp.render('respostaLogin', {mensagem: "Carro atualizado com sucesso!",carros:itens})       
+          })
+        };
+  });
+});
+
+  app.post("/comprar_carro", function(req, res) {
+    var dadosCarro = {
+        db_marca: req.body.marca,
+        db_modelo: req.body.modelo,
+        db_ano: req.body.ano,
+    };
+
+    client.db("GSantana").collection("carros").findOne(dadosCarro, function(err, carros) {
+        let novaQuantidade = carros.db_qtde_disponivel - 1;
+        client.db("GSantana").collection("carros").updateOne(dadosCarro, {$set: {db_qtde_disponivel: novaQuantidade}}, function(err, carro)
+        {
+          if(carros.modifiedCount != 0 && !err)
+            {
+              client.db("GSantana").collection("carros").find().toArray(function(err, itens)
+              {
+                res.render('respostaLogin', {mensagem: "Carro comprado com sucesso!", carros: itens});
+              });
+            };
+        });
+    });
+  });
+
+
 
 /*app.post("/cadastrar_usuario", function(requisicao, resposta)
 {

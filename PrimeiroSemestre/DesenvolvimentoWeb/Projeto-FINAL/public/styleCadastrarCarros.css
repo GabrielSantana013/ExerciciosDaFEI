@@ -1,0 +1,21 @@
+#containerImagem{
+    display:flex;
+    justify-content: center;
+}
+
+#imagem{
+    width: 400px;
+    border: 2px solid black;
+}
+
+#userIcon{
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+}
+
+#containerCadastro > form{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
