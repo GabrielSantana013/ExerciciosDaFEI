@@ -55,7 +55,14 @@ int multiplicar(int n, int m, int **matriz1, int**matriz2){
     {
         for(int j = 0; j < m; j++)
         {
-            printf("%d ", matriz1[i][j] * matriz2[j][i]);
+            int soma = 0;
+            for(int k = 0; k < m; k++)
+            {
+                soma += matriz1[i][k] * matriz2[k][j];
+            }
+            printf("%d ", soma);
+            soma = 0;
+            
         }
         printf("\n");
     }
