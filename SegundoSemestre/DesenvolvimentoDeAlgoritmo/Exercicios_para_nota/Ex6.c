@@ -6,6 +6,14 @@ listar todos os registros e buscar por registros específicos pelo nome.
 */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void limpabuffer(){
+    int c;
+    while((c = getchar()) != '\n' && c != EOF);
+
+}
 
 typedef struct Funcionario{
 
@@ -18,13 +26,8 @@ typedef struct Funcionario{
 int adicionarRegistros(char* nome_arq, Funcionario *ptrFuncionario){
 
     int bytes = sizeof(*ptrFuncionario);
-
-    //limpa buffer;
-    fflush(stdin);
     printf("Digite o nome do funcionario: \n");
     fgets(ptrFuncionario->nome, bytes, stdin);
-    //limpa buffer;
-    fflush(stdin);
     printf("Digite a idade do funcionario: \n");
     scanf("%d", &ptrFuncionario->idade);
     printf("Digite o salario do funcionario: \n");
@@ -49,32 +52,44 @@ int adicionarRegistros(char* nome_arq, Funcionario *ptrFuncionario){
 int listarRegistros(char* nome_arq, Funcionario *ptrFuncionario){
     FILE *pFile = fopen(nome_arq, "rb");
     int bytes = sizeof(*ptrFuncionario);
-    char linha[255];
 
-    while(!feof(pFile))
+    while(fread(ptrFuncionario, bytes, 1, pFile) == 1)
     {
-        fgets(linha, sizeof(linha), pFile);
-        printf("%s", linha);
-        fgets(linha, sizeof(linha), pFile);
-        printf("%s", linha);
-        fgets(linha, sizeof(linha), pFile);
-        printf("%s", linha);
-        printf("\n");
+        printf("Nome do funcionario: %s", ptrFuncionario->nome);
+        printf("Idade do funcionario: %d\n", ptrFuncionario->idade);
+        printf("Salario do funcionario: %.3f\n", ptrFuncionario->salario);
+        printf("\n"); 
     }
-
-    // while(fread(ptrFuncionario, bytes, 1, pFile) == 1)
-    // {
-    //     printf("Nome do funcionario: %s", ptrFuncionario->nome);
-    //     printf("Idade do funcionario: %d\n", ptrFuncionario->idade);
-    //     printf("Salario do funcionario: %.3f\n", ptrFuncionario->salario);
-    //     printf("\n"); 
-    // }
 
     return 0;
 }
 
 int buscarRegistros(char* nome_arq, Funcionario *ptrFuncionario){
-    FILE *pFle;
+    FILE *pFile;
+    char nome[255];
+    printf("Digite o nome do funcionario para buscar o seu registro: \n");
+    fgets(nome, sizeof(nome), stdin);
+    
+
+    if((pFile = fopen(nome_arq, "rb")) == NULL)
+    {
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+    else
+    {
+        while(fread(ptrFuncionario, sizeof(*ptrFuncionario), 1, pFile) == 1)
+        {
+            if(strcmp(ptrFuncionario->nome, nome) == 0)
+            {
+                printf("Nome do funcionario: %s", ptrFuncionario->nome);
+                printf("Idade do funcionario: %d\n", ptrFuncionario->idade);
+                printf("Salario do funcionario: %.3f\n", ptrFuncionario->salario);
+                printf("\n");
+            }
+        }
+    }
+    fclose(pFile);
     return 0;
 }
 
@@ -83,7 +98,7 @@ int main(){
 
     char nome_arq[255] = "registros.bin";
 
-    FILE *pFile = fopen(nome_arq, "wb");
+    FILE *pFile = fopen(nome_arq, "ab");
     if(pFile == NULL)
     {
         printf("Erro ao criar o arquivo.\n");
@@ -101,6 +116,7 @@ int main(){
         printf("\t3 - Buscar Registros\n");
         printf("\t0 - Sair\n");
         scanf("%d", &menu);
+        limpabuffer();
 
         switch (menu)
         {
