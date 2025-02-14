@@ -1,0 +1,40 @@
+4-) Qual a diferença entre um microcontrolador e um
+microprocessador? Descreva detalhadamente.
+
+R: Um microcontrolador contém um microprocessador, memória, barramentos e interfaces (I/O). Ou seja, ele é suficiente 
+para executar algumas tarefas.
+Já os microprocessadores é somente o processador, ou seja, ele recebe alguma instrução e processa e somente isso.
+
+5) Responda as questões abaixo:
+a) O microcontrolador que iremos utilizar na disciplina possui duas
+memórias, qual o nome desses dois espaços de memória?
+
+R: Memória RAM e ROM.
+
+b) Para que serve esses dois tipos de memória, o que podemos
+armazenar nelas?
+
+R: Na memória RAM armazenamos dados voláteis, enquanto que na memória ROM 
+armazenamos o programa do microcontrolador.
+
+c) Qual o nome do tipo de arquitetura quando temos esses dois tipos
+de memórias?
+
+R: Harvard.
+
+
+6) Acesse a documentação do Arduino Uno e compare com o 8051.
+▪ Compare as memórias indicando o tamanho de cada uma delas.
+
+UNO: ROM = 32Kb  e RAM: 2Kb e EEPROM: 1Kb  |   8051: 64Kb RAM = 256B
+
+▪ Frequência do clock.
+
+UNO: 16MHz      8051: 12MHz
+
+▪ Quantidade de portas digitais.
+
+UNO: 14 portas      8051: 32 portas
+
+▪ Os dois possuem processador de quantos bits?
+UNO: 8bits     8051: 8 bits 
