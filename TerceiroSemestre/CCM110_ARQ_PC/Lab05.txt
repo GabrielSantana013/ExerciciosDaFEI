@@ -1,0 +1,118 @@
+Exercícios:
+
+1) Um sistema possui memória com 4G de endereços e cada 
+célula é composta por 8 Bytes.
+
+a) Qual o tamanho da memória ?
+
+R: 32GB.
+
+b) Quantos bits são necessários no barramento de endereço 
+para acesso as células dessa memória?
+
+R: 2^n = 4GB (Giga = 4 bilhões) => log 4bilhões base 2 = 32 Bits.
+
+c) Quantos bits são necessários no barramento de dados para 
+acesso aos dados da memória?
+
+R: 64 bits.
+
+2) Em uma atividade de aula vocês leram na documentação do Arduino UNO 
+que ele possuí 32KB de memória flash (memória do programa) e 2KB de 
+memória RAM.
+Sabendo dessas informações responda as perguntas abaixo:
+
+a) Qual o tamanho máximo de elementos de um vetor do tipo char que 
+você pode declarar, considerando que não haverá nenhuma outra 
+variável? 
+char vetor[2048];
+
+b) Qual o tamanho máximo de elementos de um vetor do tipo int que você 
+pode declarar, considerando que não haverá nenhuma outra variável, 
+sabendo que o int no Arduino é de 16bits? 
+
+int vetor[1024];
+
+
+3) O circuito abaixo foi construído com chips de memória de 256 endereços que 
+armazenam 8 bits em cada endereço.
+
+a) Quantos bits são necessários no barramento de endereço para acesso as células 
+dessa memória?
+
+R: 256*4 = 1.024 endereços, para achar os bits do barramento a gnt faz:
+
+sabendo que um bit tem 2 estados, 2^n=1.024, ou seja, 2^10 (10 bits).
+
+b) Quantos bits são necessários no barramento de dados para acesso ao byte da 
+memória?
+
+R: 8 bits. (cada endereço armazena 8 bits, logo eu preciso de 8 bits pra ler as informações completas).
+
+c) Qual o tamanho da memória?
+
+R: Como nós temos 1024 endereços, cada um deles armazenando 1 byte (8 bits), precisamos somente multiplicar
+o 1024 por 1, ou seja 1024 Bytes de memória.
+
+
+Multiplique dois números de 8 bits. Armazene em [R4 R3] 
+o resultado da multiplicação de R0 por R1. Ou seja, faça 
+[R4 R3] ← R0 x R1.
+
+R:
+
+MOV R0, #20
+MOV R1, #20
+MOV A, R0
+MOV B, R1
+MUL AB
+MOV R4,B
+MOV R3,A
+
+Divida dois números de 8 bits. Armazene em R2 o quociente 
+e em R3 o resto da divisão de R1 por R0, supondo R0 ≠ 0. 
+Segundo a notação, faça: R2(q) e R3(r) ← R1 / R0.
+
+R:
+
+MOV R0, #5
+MOV R1, #11
+MOV A, R1
+MOV B, R0
+DIV AB
+MOV R2, A
+MOV R3, B
+
+
+6-) Monte o opcode:
+INSTRUÇÃO         OPCODE
+MOV A, R1       - E9
+ADD A, R0       - 28
+MOV R6, A       - FE
+CLR A           - E4
+ADDC A, #0      - 3400
+MOV R7, A       - FF
+
+
+7-) Monte o opcode:
+
+
+INSTRUÇÃO         OPCODE
+MOV A, R5       - ED
+MOV B, R6       - 8EF0
+DIV AB          - 84
+MOV R1, A       - F9
+MOV R0, B       - A8F0
+
+
+8-) Monte o opcode:
+
+INSTRUÇÃO         OPCODE
+MOV A, R5        - ED
+CLR C            - C3
+SUBB A, R4       - 9C
+MOV R6, A        - FE
+MOV A, R3        - EB
+SUBB A, R1       - 99
+MOV R7, A        - FF
+
