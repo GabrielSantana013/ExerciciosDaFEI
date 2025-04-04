@@ -83,7 +83,7 @@ using namespace std;
 
 int main(){
 
-    double num = -24.875;
-    printf("Valor : 0x%16llx\n", *reinterpret_cast<unsigned long long*>(&num));
+    float num = -24.875;
+    printf("Valor : 0x%x\n", *reinterpret_cast<unsigned int*>(&num));
     return 0;
 }
