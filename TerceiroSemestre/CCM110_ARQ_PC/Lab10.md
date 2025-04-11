@@ -3,28 +3,33 @@ Exercício 1:
 Calcule quanto tempo será gasto por esta subrotina, 
 considerando um cristal de 12MHz?
 
+```asm
 org 080h
 ZERAR:
-CLR A  			// 1uS
+CLR A  			    // 1uS
 MOV R0, #99 		// 1uS
 ROT:
-MOV @R0, A 		// 1uS
-NOP			// 1uS
+MOV @R0, A 		  // 1uS
+NOP			        // 1uS
 DJNZ R0, ROT		// 2uS
-RET			// 2uS
-
+RET			        // 2uS
+```
 2uS + 396uS + 2uS = 400uS
 
 Exercício 2: 
 
-Os 3 programas a seguir apresenta três possíveis soluções para o problema 
-de se zerarem os endereços de memória 30h até 38h. 
+Os 3 programas a seguir apresenta três possíveis soluções para o problema de se zerarem os endereços de memória 30h até 38h. 
+
 Compare as soluções levando em conta:
+
 ➢ o tamanho do programa e;
+
 ➢ o tempo de execução.
 
 sol 1: 27 bytes e 18uS.
+
 sol 2: 8 bytes e 38uS. 
+
 sol 3: 19 bytes e 10uS. 
 
 
@@ -58,8 +63,22 @@ Escreva uma subrotina que consuma exatamente 8ms (ou
 seja, 8000us), considerando que se usa um cristal de 12 MHz.
 
 
+```asm
+DELAY:
+MOV R0, #63 ; 1uS
 
+ROT1:
+MOV R1, #61 ; 1uS
+ROT2:
 
+DJNZ R1, ROT2 ;2uS
+DJNZ R0, ROT1 ;2uS 
 
+; falta 127uS (7869)
+
+MOV R2, #64
+ROT3:
+DJNZ R2, ROT3
+```
 
 
