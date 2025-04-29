@@ -12,6 +12,7 @@ import view.LoginFrame;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import view.AltExcFrame;
 
 /**
  *
@@ -43,6 +44,13 @@ public class ControllerLogin {
                                             "Login Efetuado",
                                             "Aviso",
                                             JOptionPane.INFORMATION_MESSAGE);
+                String nome = res.getString("nome");
+                String usuario = res.getString("usuario");
+                String senha = res.getString("senha");
+                Aluno aluno2 = new Aluno(nome, usuario, senha);
+                AltExcFrame aec = new AltExcFrame(aluno2);
+                aec.setVisible(true);
+                view.setVisible(false);
             }
             else{
             JOptionPane.showMessageDialog(view,

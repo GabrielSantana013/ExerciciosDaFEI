@@ -170,6 +170,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void bt_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_loginActionPerformed
         c.loginAluno();
+        this.setVisible(false);
     }//GEN-LAST:event_bt_loginActionPerformed
 
     private void bt_cadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastroActionPerformed

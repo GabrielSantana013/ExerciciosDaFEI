@@ -4,6 +4,12 @@
  */
 package view;
 
+import controller.ControllerUsuario;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import model.Aluno;
+
 /**
  *
  * @author unifgdias
@@ -13,9 +19,62 @@ public class AltExcFrame extends javax.swing.JFrame {
     /**
      * Creates new form AltEscFrame
      */
-    public AltExcFrame() {
+    public AltExcFrame(Aluno aluno) {
         initComponents();
+        lbl_nome_alt_esc.setText(aluno.getNome());
+        lbl_usuario_alt_esc.setText(aluno.getUsuario());
+        c = new ControllerUsuario(this, aluno);
     }
+
+    public JButton getBt_alterar() {
+        return bt_alterar;
+    }
+
+    public void setBt_alterar(JButton bt_alterar) {
+        this.bt_alterar = bt_alterar;
+    }
+
+    public JButton getBt_excluir() {
+        return bt_excluir;
+    }
+
+    public void setBt_excluir(JButton bt_excluir) {
+        this.bt_excluir = bt_excluir;
+    }
+
+    public JLabel getLbl_nome_alt_esc() {
+        return lbl_nome_alt_esc;
+    }
+
+    public void setLbl_nome_alt_esc(JLabel lbl_nome_alt_esc) {
+        this.lbl_nome_alt_esc = lbl_nome_alt_esc;
+    }
+
+    public JLabel getLbl_senha_alt_esc() {
+        return lbl_senha_alt_esc;
+    }
+
+    public void setLbl_senha_alt_esc(JLabel lbl_senha_alt_esc) {
+        this.lbl_senha_alt_esc = lbl_senha_alt_esc;
+    }
+
+    public JLabel getLbl_usuario_alt_esc() {
+        return lbl_usuario_alt_esc;
+    }
+
+    public void setLbl_usuario_alt_esc(JLabel lbl_usuario_alt_esc) {
+        this.lbl_usuario_alt_esc = lbl_usuario_alt_esc;
+    }
+
+    public JTextField getTxt_senha_alt_esc() {
+        return txt_senha_alt_esc;
+    }
+
+    public void setTxt_senha_alt_esc(JTextField txt_senha_alt_esc) {
+        this.txt_senha_alt_esc = txt_senha_alt_esc;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,6 +128,11 @@ public class AltExcFrame extends javax.swing.JFrame {
 
         bt_alterar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bt_alterar.setText("Alterar");
+        bt_alterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_alterarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,6 +165,11 @@ public class AltExcFrame extends javax.swing.JFrame {
 
         bt_excluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bt_excluir.setText("Excluir");
+        bt_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_excluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -156,6 +225,15 @@ public class AltExcFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bt_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_alterarActionPerformed
+        c.atualizar();
+    }//GEN-LAST:event_bt_alterarActionPerformed
+
+    private void bt_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_excluirActionPerformed
+        c.remover();
+        this.setVisible(false);
+    }//GEN-LAST:event_bt_excluirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -191,6 +269,8 @@ public class AltExcFrame extends javax.swing.JFrame {
 //        });
 //    }
 
+    private ControllerUsuario c;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_alterar;
     private javax.swing.JButton bt_excluir;

@@ -4,6 +4,11 @@
  */
 package view;
 
+import controller.ControllerCadastro;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author unifgdias
@@ -15,6 +20,63 @@ public class CadastroFrame extends javax.swing.JFrame {
      */
     public CadastroFrame() {
         initComponents();
+        c = new ControllerCadastro(this);
+    }
+
+    public JButton getBt_cadastrar() {
+        return bt_cadastrar;
+    }
+
+    public void setBt_cadastrar(JButton bt_cadastrar) {
+        this.bt_cadastrar = bt_cadastrar;
+    }
+
+    public JLabel getLbl_nome_cadastro() {
+        return lbl_nome_cadastro;
+    }
+
+    public void setLbl_nome_cadastro(JLabel lbl_nome_cadastro) {
+        this.lbl_nome_cadastro = lbl_nome_cadastro;
+    }
+
+    public JLabel getLbl_senha_cadastro() {
+        return lbl_senha_cadastro;
+    }
+
+    public void setLbl_senha_cadastro(JLabel lbl_senha_cadastro) {
+        this.lbl_senha_cadastro = lbl_senha_cadastro;
+    }
+
+    public JLabel getLbl_usuario_cadastro() {
+        return lbl_usuario_cadastro;
+    }
+
+    public void setLbl_usuario_cadastro(JLabel lbl_usuario_cadastro) {
+        this.lbl_usuario_cadastro = lbl_usuario_cadastro;
+    }
+
+    public JTextField getTxt_nome_cadastro() {
+        return txt_nome_cadastro;
+    }
+
+    public void setTxt_nome_cadastro(JTextField txt_nome_cadastro) {
+        this.txt_nome_cadastro = txt_nome_cadastro;
+    }
+
+    public JTextField getTxt_senha_cadastro() {
+        return txt_senha_cadastro;
+    }
+
+    public void setTxt_senha_cadastro(JTextField txt_senha_cadastro) {
+        this.txt_senha_cadastro = txt_senha_cadastro;
+    }
+
+    public JTextField getTxt_usuario_cadastro() {
+        return txt_usuario_cadastro;
+    }
+
+    public void setTxt_usuario_cadastro(JTextField txt_usuario_cadastro) {
+        this.txt_usuario_cadastro = txt_usuario_cadastro;
     }
 
     /**
@@ -102,7 +164,9 @@ public class CadastroFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastrarActionPerformed
-        // TODO add your handling code here:
+        c.salvarAluno();
+        //setVisible(rootPaneCheckingEnabled);
+        this.setVisible(false);
     }//GEN-LAST:event_bt_cadastrarActionPerformed
 
     /**
@@ -139,6 +203,8 @@ public class CadastroFrame extends javax.swing.JFrame {
 //            }
 //        });
 //    }
+    
+    private ControllerCadastro c;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_cadastrar;
