@@ -1,0 +1,89 @@
+1) Na documentação do Arduino DUE (processador ARM 32 bits) diz que ele 
+possuí 512KB de memória flash (memória do programa) e 96KB de memória 
+SRAM.
+Sabendo dessas informações responda as perguntas abaixo:
+
+a) Qual o tamanho máximo de elementos de um vetor do tipo float que 
+você pode declarar, considerando que não haverá nenhuma outra 
+variável? 
+
+R: float vetor[24000];
+
+b) Qual o tamanho máximo de elementos de um vetor do tipo double que 
+você pode declarar, considerando que não haverá nenhuma outra 
+variável? 
+R: double vetor[12000];
+
+
+Exercício 2:
+Represente o número 5.3125 usando o padrão IEEE754 de 32 bits.
+Apresente todos os cálculos realizado para a conversão.
+
+R: feito em folha
+
+
+Exercício 3:
+Verifique se sua resposta do exercício anterior está correta realizando a 
+programação em C++ e observando a representação do número 5.3125
+usando o padrão IEEE754 de 32 bits.
+
+R: 0x40aa0000 (deu certo, converte o anterior na folha pra hexa que bate)
+
+#include <stdio.h>
+
+using namespace std;
+
+int main(){
+
+    double num = 5.3125;
+    printf("Valor : 0x%x\n", *reinterpret_cast<unsigned int*>(&num));
+    return 0;
+}
+
+Exercício 4:
+Represente o número 5.3125 usando o padrão IEEE754 de 64 bits.
+Apresente todos os cálculos realizado para a conversão.
+
+R: feito em folha
+
+Exercício 5:
+Verifique se sua resposta do exercício anterior está correta realizando 
+a programação em C++ e observando a represente do número 5.3125
+usando o padrão IEEE754 de 64 bits.
+
+R:
+#include <stdio.h>
+
+using namespace std;
+
+int main(){
+
+    double num = 5.3125;
+    printf("Valor : 0x%16llx\n", *reinterpret_cast<unsigned long long*>(&num));
+    return 0;
+}
+
+Exercício 6:
+Represente o número -24.875 usando o padrão IEEE754 de 32 bits.
+Apresente todos os cálculos realizado para a conversão.
+
+R: feito no caderno
+
+Exercício 7:
+Verifique se sua resposta do exercício anterior está correta realizando a 
+programação em C++ e observando a represente do número -24.875
+usando o padrão IEEE754 de 32 bits.
+
+
+R: 
+
+#include <stdio.h>
+
+using namespace std;
+
+int main(){
+
+    float num = -24.875;
+    printf("Valor : 0x%x\n", *reinterpret_cast<unsigned int*>(&num));
+    return 0;
+}

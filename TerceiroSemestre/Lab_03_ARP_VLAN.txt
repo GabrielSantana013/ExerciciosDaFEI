@@ -1,0 +1,42 @@
+Alunos:
+
+Gabriel Santana Dias 	RA: 24.124.071-2
+Pedro Schneider 	RA: 24.124.072-0
+Ana Maria 		RA: 24.222.021-8
+Guilherme Antoniassi 	RA: 24.223.013-4
+
+f1-) Primeiramente o computador de origem manda o pacote para o switch. Então o switch envia o pacote para todos os computadores da rede procurando pelo endereço de destino (através do ARP). O computador de destino envia uma resposta ao switch, que por sua vez adiciona o endereço MAC deste dispositivo na sua tabela. A partir desse ponto, a comunicação entre os dois computadores não precisa mais inundar a rede com requisições, pois eles já se "conhecem".
+
+g-) A tabela contém os seguintes campos:
+
+Internet Address      Physical Address      Type
+10.10.10.103          0060.5cba.b980        dynamic
+
+h1-) Não há mais envio de pacotes ARP, somente ICMP.
+
+h2-) Dessa vez, o switch conhece o endereço de origem e destino. Por conta disso, basta enviar pacotes ICMP, sem a necessidade de inundar a rede.
+
+k-) Não. A comunicação acontece somente com os pc's da mesma rede (VLAN).
+
+i-) Pinging 10.10.10.101 with 32 bytes of data:
+
+Reply from 10.10.10.101: bytes=32 time=4ms TTL=128
+Reply from 10.10.10.101: bytes=32 time=4ms TTL=128
+Reply from 10.10.10.101: bytes=32 time=4ms TTL=128
+Reply from 10.10.10.101: bytes=32 time=4ms TTL=128
+
+Ping statistics for 10.10.10.101:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 4ms, Maximum = 4ms, Average = 4ms
+
+Como podemos ver, o ping ocorreu normalmente e sem problemas, pois estão na mesma VLAN e se conhecem.
+
+
+j-) O pc0 enviou para o switch, que por sua vez enviou para todos os pcs da mesma rede com intuito de obter o endereço MAC do destinatário. Como só havia um computador na rede, ele enviou diretamente para o destinatário, que respondeu e iniciou a comunicação.
+
+o-) Não. Novamente o pacote foi enviado apenas para o pc da mesma rede do pc0.
+
+p-) Como os não pertenciam a mesma VLAN, o ping falhou com "Request timed out", ou seja, não conseguiu chegar ao destino a tempo.
+
+q-) Para que eles se comuniquem em redes diferentes, é necessário realizar um roteamento. Para isso, é necessário que tenha um switch nível 3 com capacidade de roteamento para identificar os rótulos das VLAN's.

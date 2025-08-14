@@ -1,0 +1,77 @@
+1. Dentre os padrões de interfaces a seguir listados, o único que 
+NÃO é serial é:
+
+a) USB.
+b) SATA.
+c) RS 232.
+d) PCI Express.
+e) PATA.
+
+R: PATA. O PATA é tipo o de HD antigo, (um cabo flet)
+
+2. Sobre a modalidade de transmissão de dados, pode-se dizer 
+que a transmissão serial é:
+
+a) Aquela em que todos os bytes são enviados de uma só vez e são 
+recebidos de um em um.
+b) Aquela em que os bits são enviados paralelamente em um fio só.
+c) Feita somente em dispositivos de entrada de dados.
+d) Aquela que transmite bytes em série.
+e) Aquela em que os bits são transmitidos um por vez.
+
+R: E. A comunicação serial transmite os bits um a um.
+
+3. Os padrões SATA e ATA diferenciam-se pela forma de 
+transmissão: serial e paralela, respectivamente, e também 
+pelo conector utilizado. No caso do padrão ATA, utiliza-se o 
+conector:
+a) RJ45.
+b) DB 25.
+c) DB 9.
+d) PCI.
+e) IDE.
+
+R: E (IDE)
+
+4. A alimentação elétrica fornecida por uma conexão padrão USB 
+(Universal Serial Bus) é da ordem de:
+a) 7V.
+b) 5V.
+c) 3,3V.
+d) 12V.
+e) 9V.
+
+R: B, 5V.
+
+5. Considerando os modos de transmissão do protocolo RS-232, 
+o número mínimo de condutores necessários para o modo 
+full-duplex é:
+a) 1.
+b) 2.
+c) 3.
+d) 4.
+e) 5.
+
+R: C, 3 canais (no mínimo um para ouvir, um para enviar e um GND interligando).
+
+6. Os padrões de comunicação serial USB em suas versões 1.1, 
+2.0 e 3.0 apresentam, respectivamente, taxas máximas de 
+transmissões de:
+a) 1,5 Mb/s, 12 Mb/s e 480 Mb/s.
+b) 12 Mb/s, 48 Mb/s e 4,8 Gb/s.
+c) 1,5 Mb/s, 12 Mb/s e 48 Mb/s.
+d) 12 Mb/s, 480 Mb/s e 5 Gb/s.
+e) 12 Mb/s, 480 Mb/s e 10 Gb/s
+
+R: D.
+
+7. Em uma rede de computadores, no sistema de transferência 
+de dados serial síncrona os bits são transmitidos:
+a) um de cada vez, caractere a caractere, sem os bits de start/stop.
+b) um de cada vez, por caractere, entre os bits de start/stop.
+c) um de cada vez, por grupo de caracteres, sem os bits de start/stop.
+d) um de cada vez, por grupo de caracteres, entre os bits de start/stop.
+e) todos de uma só vez, por caractere, entre os bits de start/stops.
+
+
+R: A. Eles são enviados um de cada vez, e lidos pelo clock. Não possuem bit de start/stop. 

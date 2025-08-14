@@ -1,0 +1,141 @@
+1) Em uma atividade da aula vocês leram na documentação do Arduino UNO 
+que ele possuí 32KB de memória flash (memória do programa) e 2KB de 
+memória RAM.
+Sabendo dessas informações responda as perguntas abaixo:
+
+a) Qual o tamanho máximo de elementos de um vetor do tipo char que 
+você pode declarar, considerando que não haverá nenhuma outra 
+variável? 
+
+r: char vetor[2.000];
+
+b) Qual o tamanho máximo de elementos de um vetor do tipo int que você 
+pode declarar, considerando que não haverá nenhuma outra variável, 
+sabendo que o int no Arduino é de 16bits? 
+
+r: int vetor[1.000]
+
+Exercício 2:
+
+Represente o número -20 usando o padrão complemento de 2 em 8bits.
+Apresente todos os cálculos realizado para a conversão.
+
+Apresente o valor representado pela calculadora do programador (print 
+da tela).
+
+20 -> 0001 0100
+comp->1110 1011
+comp2-> 1110 1100  
+
+
+Exercício 3:
+
+Verifique se sua resposta do exercício anterior está correta realizando a 
+programação em C++ e observando a representação do número -20.
+
+...
+
+Exercício 4:
+
+Quanto você declara uma variável do tipo int no Arduino UNO, ele usa apenas 
+2 Bytes para armazenamento do conteúdo da variável.
+
+Qual faixa de números que podemos representar em uma variável do tipo int
+no Arduino UNO?
+
+R: -32.768 até +32.767
+
+
+Exercício 5:
+
+Quanto você declara uma variável do tipo long no Arduino UNO, ele usa 4
+Bytes para armazenamento do conteúdo da variável.
+
+Qual faixa de números inteiros que podemos representar em uma variável do 
+tipo long no Arduino UNO?
+
+R: -2.147.483.648 até +2.147.483.647
+
+
+Exercício 6:
+Quanto você declara uma variável do tipo unsigned int no Arduino UNO, ele 
+usa apenas 2 Bytes para armazenamento do conteúdo da variável.
+
+Qual faixa de números que podemos representar em uma variável do tipo 
+unsigned int no Arduino UNO?
+
+r: 0 até 65.535
+
+Exercício 7:
+
+Quanto você declara uma variável do tipo unsigned long no Arduino UNO, 
+ele usa apenas 4 Bytes para armazenamento do conteúdo da variável.
+
+Qual faixa de números que podemos representar em uma variável do tipo 
+unsigned long no Arduino UNO?
+
+
+R: 0 até +4.294.967.296
+
+
+Exercício 8:
+
+Quanto você declara uma variável do tipo long long no Arduino UNO, ele usa 
+8 Bytes para armazenamento do conteúdo da variável.
+
+Qual faixa de números inteiros que podemos representar em uma variável do 
+tipo long long no Arduino UNO?
+
+R: -9.223.372.036.854.775.808 até +9.223.372.036.854.775.807
+
+
+Exercício 9:
+
+Sabemos que uma variável do tipo int no Arduino UNO ocupa 16 bits. 
+
+Portanto, represente em binário o número armazenado na variável do 
+programa abaixo:
+int valor = -52
+
+0000 0000 0011 0100
+0000 0000 1100 1011
+R: 1111 1111 1100 1100
+(como é negativo completa com 1)
+
+Exercício 10:
+
+Explique o que é overflow e underflow em relação à representação 
+de números inteiros (apresente exemplos do underflow e overflow 
+de números inteiros de 32bits).
+
+r:
+overflow: Quando seu programa faz uma conta que ultrapassa o valor de +2.147.483.647 (máximo em 32 bits signed), o que faz com que gere um overflow 
+underflow: Quando seu programa faz uma conta que ultrapassa o valor de -2.147.483.648 (máximo em 32 bits signed), o que faz com que gere um underflow
+
+Exemplo de overflow: +2.147.483.648 
+Exemplo de underflow: -2.147.483.649 
+
+Exercício 11:
+Represente em binário o número 43 utilizando a representação 
+excessiva em máquinas de 8 bits usando um bias de 127.
+
+127 + 43 = 170 
+r: 1010 1010
+
+Exercício 12:
+Represente em binário o número -20 utilizando a representação 
+excessiva em máquinas de 8 bits usando um bias de 127.
+
+127 - 20 = 107
+r: 0110 1011
+
+
+Exercício 13:
+Converta os números abaixo para hexadecimal (agrupa de 4 em 4 e converte).
+
+(10011110)2 = 9E
+
+(10111010)2 = BA
+
+(1100110110000011)2 = CD83
+

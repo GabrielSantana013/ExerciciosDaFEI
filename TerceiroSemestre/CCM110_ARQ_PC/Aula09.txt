@@ -1,0 +1,130 @@
+Exercício 1:
+Calcule quanto tempo será gasto por esta subrotina, 
+considerando um cristal de 12MHz?
+
+Subrotina para zerar a RAM interna
+Retorna: posições de 0 a 127 da RAM interna zeradas
+USA: A e R0
+
+ZERAR:  CLR A ;A = 0
+	MOV R0, #127; R0 = endereço mais alto
+ROT:	MOV @R0, A ;zera posição apontada por R0
+	DJNZ R0, ROT ;decrementa ponteiro e contador
+	RET ;retorna da subrotina
+
+R:
+CLR A = 1 CICLO
+MOV R0, @127 = 1 CICLO
+MOV @R0, A = 1 CICLO
+DJNZ R0, ROT = 2 CICLOS
+
+RET = 2 CICLOS
+
+Como ele vai zerar a posição apontada por R0 127 vezes, nós temos 127*3 = 381
++2 das duas instruções acima, 383, mais o retorno = 385.
+
+
+
+Exercício 2:
+Os dois programas abaixo fazem a mesma tarefa, zerar os 
+registradores R5 e R6. Compare as duas soluções com relação 
+ao tamanho de programa e tempo de execução.
+
+MOV R6, #0 = 2 bytes e 1 ciclo
+MOV R5, #0 = 2 bytes e 1 ciclo
+
+
+CLR A = 1 byte e 1 ciclo
+MOV R6, A = 1 byte e 1 ciclo
+MOV R5, A = 1 byte e 1 ciclo
+
+R: O primeiro programa custa 4 bytes de memória e 2 microssegundos de execução. Já o segundo programa custa 3 bytes de memória e os mesmos 3 microssegundos de execução. 
+
+
+Exercício 3:
+Escreva uma subrotina para consumir 500 μs, ou seja, que 
+gere um intervalo de tempo de 500 μs, considerando que se 
+usa um cristal de 12 MHz.
+
+
+DELAY:
+	MOV R0, #248 ; 1CICLO
+ROTINA500: 
+	DJNZ R0, ROTINA500; 248 * 2 = 496 CICLOS
+	NOP ; 1 CICLO
+RET ;2 CICLOS
+
+
+;R: TOTAL = 500Us (microssegundos)
+
+
+Exercício 4:
+Escreva uma subrotina que consuma exatamente 10ms, 
+considerando que se usa um cristal de 12 MHz
+
+10ms = 10.000Us
+
+
+Resposta certa:
+
+delay:
+	mov r0, #84 ;1
+rot1:
+	mov r1, #58 ;1
+rot2:
+	djnz r1, rot2 ;2*R1
+	djnz r0, rot1 ;(1+2*R1+2)*r0
+	nop ;1
+ret; 2
+
+
+Minha resposta (errada):
+
+DELAY:
+	MOV R1, #20 ; 1 CICLO
+	MOV R0, #249; 1CICLO
+ROTINA10000: 
+	DJNZ R0, ROTINA10000; 249 * 2 = 498 CICLOS
+	MOV R0, #249 ; 1* 20
+		DJNZ R1, ROTINA10000 ;2 * 20 = 40
+ 
+
+Exercício 5:
+Os 3 programas a seguir apresenta três possíveis soluções para 
+o problema de se zerarem os oito registradores [R7, ... R0] do 
+banco 0. Compare as soluções levando em conta o tamanho do 
+programa e tempo de execução.
+
+SOLUCAO 1:
+
+MOV R7, #0 = 2 BYTES E 1 CICLO
+MOV R6, #0 = 2 BYTES E 1 CICLO
+MOV R5, #0 = 2 BYTES E 1 CICLO
+MOV R4, #0 = 2 BYTES E 1 CICLO
+MOV R3, #0 = 2 BYTES E 1 CICLO
+MOV R2, #0 = 2 BYTES E 1 CICLO
+MOV R1, #0 = 2 BYTES E 1 CICLO
+MOV R0, #0 = 2 BYTES E 1 CICLO
+
+SOLUCAO 2:
+
+CLR A = 1 BYTE, 1 CICLO
+MOV R7, A = 1 BYTE, 1 CICLO
+MOV R6, A = 1 BYTE, 1 CICLO
+MOV R5, A = 1 BYTE, 1 CICLO
+MOV R4, A = 1 BYTE, 1 CICLO
+MOV R3, A = 1 BYTE, 1 CICLO
+MOV R2, A = 1 BYTE, 1 CICLO
+MOV R1, A = 1 BYTE, 1 CICLO
+MOV R0, A = 1 BYTE, 1 CICLO
+
+SOLUCAO 3 : 
+CLR A = 		1 BYTE, 1 CICLO
+MOV R0, #8 = 		2 BYTE, 1 CICLO
+LB: MOV @R0, A = 	1 BYTE, 1 CICLO
+DJNZ R0, LB  = 		2 BYTES, 2 CICLOS
+
+
+R: SOLUCAO 1: 16BYTES E 8 CICLOS
+SOLUCAO 2: 9 BYTES E 9 CICLOS
+SOLUCAO 3: 6 BYTES E 26 CICLOS
