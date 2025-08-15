@@ -37,13 +37,10 @@ void inserir(LDDE *lista, int valor) {
         anterior = atual;
         atual = atual->proximo;
     }
-//2 3 4 5
-//1(2)
     if(anterior == NULL){
 		novo->proximo = lista->primeiro;
-        lista->primeiro = novo;
-		atual->anterior = novo;
-		
+		lista->primeiro = novo;
+		if(lista->qtde > 0){atual->anterior = novo;}
     }else if (atual == NULL){
 		anterior->proximo = novo;
 		novo->anterior = anterior;
@@ -100,7 +97,8 @@ void remover(LDDE *lista, int valor) {
 		anterior = atual;
 		atual = atual->proximo;
 	}if(anterior == NULL){
-		lista->primeiro = atual->proximo;
+		if(atual->anterior == NULL){lista->primeiro = atual->proximo;}
+		atual->anterior = anterior;
 	}
 	else if(atual == NULL){
 		return;
@@ -109,7 +107,14 @@ void remover(LDDE *lista, int valor) {
 		anterior->proximo = newCel;
 		newCel->anterior = anterior;
 	}
+	free(atual);
 	lista->qtde--;
+
+	// 0 1 2 3 4 5 6 7 8 9
+	// 9 8 7 6 5 4 3 2 1 0
+	//atual: 
+	//anterior: null
+
 }
 
 
