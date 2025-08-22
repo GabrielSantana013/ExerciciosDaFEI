@@ -3,8 +3,8 @@
 
 typedef struct Celula{
     int value;
-    Celula *next;
-    Celula *previous;
+    struct Celula *next;
+    struct Celula *previous;
 
 }Celula;
 
@@ -15,39 +15,72 @@ typedef struct Fila{
 }Fila;
 
 Fila *criar_fila(){
-    Fila *fila = malloc(sizeof(fila));
+    Fila *fila = malloc(sizeof(Fila));
     fila->qtt = 0;
-    fila->previous = NULL;
-    fila->next = NULL;
+    fila->head = NULL;
+    fila->tail = NULL;
     return fila;
 }
 
 Celula *criar_celula(int valor){
-    Celula *celula = malloc(sizeof(celula));
-    celula->valor = valor;
+    Celula *celula = malloc(sizeof(Celula));
+    celula->value = valor;
     celula->next = NULL;
     celula->previous = NULL;
     return celula;
 }
 
-void enqueue(Fila *fila, Celula *celula){
-    if(fila->qtt == 0){
-        fila->head = celula;
-        fila->tail = celula->next;
-        fila->qtt++;
+void enqueue(Fila *fila, int valor){
+
+    Celula *novo = criar_celula(valor);
+
+    //primeira inserção na fila
+    if(fila->head == NULL){
+        fila->head = novo;
+        fila->tail = novo;
+        //inserção no final da fila
+    }else{
+        fila->tail->next = novo;
+        novo->previous = fila->tail;
+        fila->tail = novo;
     }
-    fila->head = 
+    fila->qtt++;
 }
 
-void dequeue(){
-
+void dequeue(Fila *fila){
+    if(fila->qtt == 0){
+        fila->head = NULL;
+        fila->tail = NULL;
+        return;
+    }
+    Celula *temp = fila->head;
+    fila->head = temp->next;
+    free(temp);
+    fila->qtt--;
 }
 
-void imprime_fila(){
+void imprime_fila(Fila *fila){
 
+    Celula *cel = fila->head;
+
+    printf("Comeco -> ");
+    while(cel != NULL){
+        printf("%d", cel->value);
+        cel = cel->next;
+    }
+    printf(" <-Final\n");
 }
 
 int main(){
 
+    Fila *fila = criar_fila();
+    for(int i = 0; i < 10; i++){
+        enqueue(fila, i);
+        imprime_fila(fila);
+    }
+    for(int i = 0; i < 10; i++){
+        dequeue(fila);
+        imprime_fila(fila);
+    }
     return 0;
 }

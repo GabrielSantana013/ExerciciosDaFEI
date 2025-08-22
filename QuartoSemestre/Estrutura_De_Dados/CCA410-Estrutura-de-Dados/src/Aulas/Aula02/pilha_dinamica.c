@@ -19,7 +19,7 @@ Celula *criar_celula(int valor){
 }
 
 Pilha *criar_pilha(){
-    Pilha *pilha = malloc(sizeof(pilha));
+    Pilha *pilha = malloc(sizeof(Pilha));
     pilha->qtt = 0;
     return pilha;
 }
