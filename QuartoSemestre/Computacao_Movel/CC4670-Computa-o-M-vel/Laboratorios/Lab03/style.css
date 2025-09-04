@@ -1,0 +1,34 @@
+/* style.css */
+
+body {
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 40px;
+  text-align: center;
+}
+
+input[type="number"] {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+}
+
+.feedback {
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-weight: bold;
+}
