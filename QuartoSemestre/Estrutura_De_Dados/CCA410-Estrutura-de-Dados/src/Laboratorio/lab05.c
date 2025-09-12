@@ -14,20 +14,17 @@ typedef struct Arvore{
 } Arvore;
 
 void in_ordem(Vertice *raiz) {
-    if(raiz == NULL){
+    if (raiz == NULL)
         return;
-    }
 
     in_ordem(raiz->esq);
     printf("%d ", raiz->valor);
     in_ordem(raiz->dir);
-
 }
 
 void pre_ordem(Vertice *raiz) {
-    if(raiz == NULL){
+        if (raiz == NULL)
         return;
-    }
 
     printf("%d ", raiz->valor);
     pre_ordem(raiz->esq);
@@ -35,14 +32,12 @@ void pre_ordem(Vertice *raiz) {
 }
 
 void pos_ordem(Vertice *raiz) {
-    if(raiz == NULL){
+    if (raiz == NULL)
         return;
-    }
 
     pos_ordem(raiz->esq);
     pos_ordem(raiz->dir);
     printf("%d ", raiz->valor);
-     
 }
 
 Vertice *cria_vertice(int valor){
@@ -91,39 +86,61 @@ void inserir(Arvore* arvore, int valor){
     }else{
         pai->dir = novo;
     }
+
+    novo->pai = pai;
     arvore->qtde++;
     
 }
 
+
 int remover_vertice(Arvore* arvore, Vertice* vertice) {
+    if (vertice == NULL) return 0;
 
-    if(vertice == NULL){
-        return 0;
-    }
-
-    Vertice *pai = vertice->pai;
-    Vertice *subst = NULL;
-
-    //0
     if(vertice->esq == NULL && vertice->dir == NULL){
-        if(vertice->pai != NULL){
-            if(Vetice->pai->esq == vertice){
+        if (vertice->pai != NULL){
+            if (vertice->pai->esq == vertice)
+                // vertice menor do pai
                 vertice->pai->esq = NULL;
-            }
-            else{
+            else
+                // vertice maior do pai
                 vertice->pai->dir = NULL;
-            }
-        }else{
+        } else{
             arvore->raiz = NULL;
         }
-
         free(vertice);
-    }else if(vertice->dir == NULL){
-        if(vertice != pai){}
+    } else if (vertice->dir == NULL){
+        if (vertice->pai != NULL){
+            if (vertice->pai->esq == vertice)
+                vertice->pai->esq = vertice->esq;
+            else
+                vertice->pai->dir = vertice->esq;
+        } else{
+            arvore->raiz = vertice->esq;
+        }
+        vertice->esq->pai = vertice->pai;
+        free(vertice);
+    } else if (vertice->esq == NULL){
+        if (vertice->pai != NULL){
+            if(vertice->pai->esq == vertice)
+                vertice->pai->esq = vertice->dir;
+            else
+                vertice->pai->dir = vertice->dir;
+        } else{
+            arvore->raiz = vertice->dir;
+        }
+        vertice->dir->pai = vertice->pai;
+        free(vertice);
+    } else {
+        // encontrar o predecessor (maior da subárvore esquerda)
+        Vertice* predecessor = vertice->esq;
+        while (predecessor->dir != NULL) {
+            predecessor = predecessor->dir;
+        }
+        vertice->valor = predecessor->valor;
+        remover_vertice(arvore, predecessor);
     }
-
-
-   
+    
+    return 1;
 }
 
 Vertice *buscar_valor(Arvore* arvore, int valor){

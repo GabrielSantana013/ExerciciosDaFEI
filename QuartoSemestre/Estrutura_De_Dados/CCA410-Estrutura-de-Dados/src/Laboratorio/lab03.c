@@ -61,6 +61,7 @@ void peneirar_para_cima(heap *h, int filho_idx){
     int pai_idx = (filho_idx-1)/2;
 
     if(h->valores[pai_idx] < h->valores[filho_idx]){
+        swap(&h->valores[pai_idx], &h->valores[filho_idx]);
         peneirar_para_cima(h, pai_idx);
     }
 
