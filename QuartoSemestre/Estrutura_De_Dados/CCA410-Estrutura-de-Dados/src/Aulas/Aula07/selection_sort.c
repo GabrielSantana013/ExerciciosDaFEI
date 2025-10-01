@@ -21,7 +21,6 @@ void selection_sort(int* vetor, int tamanho){
             vetor[min] = vetor[i];
             vetor[i] = temp;
         }
-
     }
 }
 
