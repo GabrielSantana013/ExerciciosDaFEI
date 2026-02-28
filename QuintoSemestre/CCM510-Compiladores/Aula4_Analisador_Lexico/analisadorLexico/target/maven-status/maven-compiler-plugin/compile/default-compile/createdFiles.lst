@@ -1,0 +1,5 @@
+com\mycompany\analisadorlexico\AFD.class
+com\mycompany\analisadorlexico\Token.class
+com\mycompany\analisadorlexico\Lexer.class
+com\mycompany\analisadorlexico\Main.class
+com\mycompany\analisadorlexico\MathOperator.class
