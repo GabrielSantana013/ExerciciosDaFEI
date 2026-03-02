@@ -15,27 +15,36 @@ public class MathOperator extends AFD{
 
     @Override
     public Token evaluate(CharacterIterator code) {
-        switch(code.current()){
-            
-            case '+':
-                return new Token("PLUS", "+");
-            case '-':
-                return new Token("SUB", "-");
-            case '*':
-                return new Token("MUL", "*");
-            case '/':
-                return new Token("DIV", "/");
+        return switch (code.current()) {
+            case '+' -> {
+                code.next();
+                yield new Token("PLUS", "+");
+            }
+            case '-' -> {
+                code.next();
+                yield new Token("SUB", "-");
+            }
+            case '*' -> {
+                code.next();
+                yield new Token("MUL", "*");
+            }
+            case '/' -> {
+                code.next();
+                yield new Token("DIV", "/");
+            }
 //            case '(':
 //                return new Token("AP", "(");
 //            case ')':
-//                return new Token("FP", ")"); 
-            case '\n':
-                return new Token("NEW_LINE", "\n");
-            case CharacterIterator.DONE:
-                return new Token("EOF","$");
-            default:
-                return null;
-        
-        }
+//                return new Token("FP", ")");
+            case '\n' -> {
+                code.next();
+                yield new Token("NEW_LINE", "\n");
+            }
+            case CharacterIterator.DONE -> {
+                code.next();
+                yield new Token("EOF", "$");
+            }
+            default -> null;
+        };
     }
 }

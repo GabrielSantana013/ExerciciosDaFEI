@@ -15,7 +15,7 @@ public class Main {
         
         List<Token> tokens = null;
         
-        String data = "+++";
+        String data = "2+3*4+9";
         Lexer lexer = new Lexer(data);
         tokens = lexer.getTokens();
         for(Token token : tokens){

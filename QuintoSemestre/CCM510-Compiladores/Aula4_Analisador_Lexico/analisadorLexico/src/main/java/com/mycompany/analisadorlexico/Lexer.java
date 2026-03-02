@@ -23,7 +23,8 @@ public class Lexer {
         tokens = new ArrayList<>();
         this.code = new StringCharacterIterator(code);
         afds = new ArrayList<>();
-        afds.add(new MathOperator());     
+        afds.add(new MathOperator());
+        afds.add(new Number());
     }
     
     public void skipWhiteSpaces(){
