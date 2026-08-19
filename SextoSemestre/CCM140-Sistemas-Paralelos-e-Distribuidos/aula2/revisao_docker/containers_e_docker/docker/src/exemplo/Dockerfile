@@ -4,4 +4,4 @@ WORKDIR /arquivos
 
 RUN apk add python3
 
-CMD ["sh"]
+CMD ["python3", "main.py"]
