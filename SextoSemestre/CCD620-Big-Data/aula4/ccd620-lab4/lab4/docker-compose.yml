@@ -1,0 +1,63 @@
+services:
+  redpanda:
+    image: redpandadata/redpanda:v24.2.10
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp
+      - "1"
+      - --memory
+      - "1G"
+      - --reserve-memory
+      - "0M"
+      - --node-id
+      - "0"
+      - --check=false
+      - --set
+      - redpanda.auto_create_topics_enabled=true
+      - --kafka-addr
+      - PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr
+      - PLAINTEXT://redpanda:9092
+    ports:
+      - "9092:9092"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  speed:
+    image: anjoletto/ccd620:lambda
+    depends_on:
+      - redpanda
+      - redis
+    volumes:
+      - ./data:/app/data
+      - ./src/speed_consumer.py:/app/main.py
+
+  api:
+    image: anjoletto/ccd620:lambda
+    depends_on:
+      - redis
+    command: ["fastapi", "run"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./src/api.py:/app/api.py
+
+  generator:
+    image: anjoletto/ccd620:lambda
+    depends_on:
+      - redpanda
+    volumes:
+      - ./data:/app/data
+      - ./src/generator.py:/app/main.py
+
+  batch:
+    image: anjoletto/ccd620:lambda
+    volumes:
+      - ./data:/app/data
+      - ./src/batch_job.py:/app/main.py
