@@ -1,0 +1,93 @@
+services:
+  redpanda:
+    image: redpandadata/redpanda:v24.2.10
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp
+      - "1"
+      - --memory
+      - "1G"
+      - --reserve-memory
+      - "0M"
+      - --node-id
+      - "0"
+      - --check=false
+      - --set
+      - redpanda.auto_create_topics_enabled=true
+      - --kafka-addr
+      - PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr
+      - PLAINTEXT://redpanda:9092
+    ports:
+      - "9092:9092"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  processor:
+    image: anjoletto/ccd620:kappa
+    depends_on:
+      - redpanda
+      - redis
+    command: ["python", "-m", "src.stream_processor"]
+    environment:
+      KAFKA_BROKER: redpanda:9092
+      TOPIC: transactions
+      GROUP: stream-layer
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+
+  api:
+    image: anjoletto/ccd620:kappa
+    depends_on:
+      - redpanda
+      - redis
+    command: ["uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "8000"]
+    environment:
+      KAFKA_BROKER: redpanda:9092
+      TOPIC: transactions
+      GROUP: stream-layer
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+
+  generator:
+    image: anjoletto/ccd620:kappa
+    depends_on:
+      - redpanda
+    command: ["python", "-m", "src.generator"]
+    environment:
+      KAFKA_BROKER: redpanda:9092
+      TOPIC: transactions
+      EVENTS: 2000
+      SLEEP_MS: 10
+      DATA_DIR: /app/data
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+
+  rebuild:
+    image: anjoletto/ccd620:kappa
+    depends_on:
+      - redpanda
+      - redis
+    command: ["python", "-m", "src.rebuild_job"]
+    environment:
+      KAFKA_BROKER: redpanda:9092
+      TOPIC: transactions
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
