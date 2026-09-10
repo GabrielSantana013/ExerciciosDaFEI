@@ -1,0 +1,4 @@
+from src.validar_quantidade import validar_quantidade
+from src.retirar_do_estoque import retirar_do_estoque
+from src.classificar_estoque import classificar_estoque
+from src.calcular_valor_total import calcular_valor_total
