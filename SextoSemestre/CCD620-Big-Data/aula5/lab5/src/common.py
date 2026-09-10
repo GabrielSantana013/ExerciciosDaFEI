@@ -37,7 +37,7 @@ def process_event(r: redis.Redis, event: dict) -> None:
     pipe.hincrby(METRICS_KEY, "events_total", 1)
 
     if event.get("event_type") == "purchase":
-        pipe.hincrby(METRICS_KEY, "purchases_total", 1)
+        pipe.hincrby(METRICS_KEY, "purchases_total", 2)
         pipe.hincrbyfloat(METRICS_KEY, "purchase_amount_total", float(event.get("amount", 0.0)))
 
     if event.get("event_type") == "cart_abandon":
