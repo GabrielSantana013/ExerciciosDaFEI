@@ -1,0 +1,3 @@
+a) O produto completo tem 3 × 3 × 2 × 3 = 54 combinações. O mínimo de um conjunto pairwise é 9 (3 × 3, os dois maiores domínios). Todo par (transportadora, embalagem) precisa aparecer em algum caso, são 9 pares distintos, e cada caso cobre só um deles. Logo não dá para ter menos de 9 casos.
+
+b) O AllPairs gerou 10 casos, contra 54 do produto completo. Ele é guloso, então não garante o mínimo teórico de 9. Esses 10 casos cobrem os 45 pares de valores (9+6+9+6+9+6).
