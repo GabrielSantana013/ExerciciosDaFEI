@@ -1,0 +1,93 @@
+a) As classes de equivalencia da idade sao:
+   - invalida: idade menor que 0;
+   - bebe: de 0 a 1 ano;
+   - crianca: de 2 a 11 anos;
+   - adulto: de 12 a 120 anos;
+   - invalida: idade maior que 120.
+
+   Os valores-limite validos sao 0, 1, 2, 11, 12 e 120.
+   Para testar tambem as classes invalidas, podem ser usados -1 e 121.
+
+b) REPRESENTANTES: idade [1, 6, 40].
+   O produto completo tem 3 x 2 x 3 x 2 = 36 combinacoes.
+   O minimo teorico pairwise e 9, pois idade e malas sao os dois maiores
+   dominios (3 x 3). O AllPairs gera 9 casos.
+
+   LIMITES: idade [0, 1, 2, 11, 12, 120], em ordem crescente.
+   O produto completo tem 6 x 2 x 3 x 2 = 72 combinacoes.
+   O minimo teorico pairwise e 18, pois idade e malas sao os dois maiores
+   dominios (6 x 3). O AllPairs gera 18 casos.
+
+c) esperado() foi implementada em test/test_passagem.py e cada modelo foi
+   executado com seu conjunto pairwise.
+
+    REPRESENTANTES encontrou 2 falhas, ambas com idade 6 na classe executiva:
+    crianca deveria pagar 75%, mas a funcao paga tarifa cheia.
+
+    LIMITES encontrou 5 casos de falha: dois com idade 11 na classe executiva,
+    dois com idade 2 na classe executiva e um com idade 2 na classe economica.
+    Os casos com idade 2 revelam que essa idade foi tratada como bebe (10%),
+    quando deveria ser crianca (75%); os casos com idade 11 revelam o desconto
+    infantil indevidamente condicionado a classe economica.
+
+d) Ha 2 defeitos:
+   1. A condicao idade <= 2 deveria ser idade <= 1. Foi encontrado por
+      LIMITES, porque 2 e o limite de entrada da classe crianca; nao aparece
+      em REPRESENTANTES.
+   2. O desconto de crianca nao pode depender de classe == "economica".
+      Foi encontrado pelos dois modelos, com idade 6 em REPRESENTANTES e
+      idade 11 em LIMITES, nas combinacoes com classe executiva.
+
+
+Exercicio 2
+
+a) combinacoes_de(casos, t) esta implementada em test/test_passagem.py.
+   Ela percorre todas as escolhas de t indices de parametros e guarda os
+   pares (indice, valor), evitando confundir valores iguais em parametros
+   diferentes. Para t = 2, ela representa os pares cobertos pelo pairwise.
+
+b) O universo tem 108 triplas distintas:
+   C(4, 3) = 36 + 24 + 36 + 12 = 108.
+   O conjunto pairwise de 18 casos cobre 60 triplas, ou 60/108 = 5/9,
+   aproximadamente 55,56%.
+
+c) O minimo e 36 casos. A combinacao dos tres maiores dominios tem
+   6 x 2 x 3 = 36 valores e cada caso cobre apenas uma dessas triplas,
+   portanto menos de 36 casos e impossivel. Esse limite e atingivel usando
+   os 36 casos do produto desses tres parametros e escolhendo os valores do
+   trecho para que cada par de parametros tambem apareca com os dois trechos.
+
+   Comparacao:
+   - pairwise: 18 casos, mas cobre somente pares (e 60 das 108 triplas);
+   - cobertura completa de triplas: minimo de 36 casos;
+   - produto completo: 72 casos.
+
+d) AllPairs(LIMITES, n=3) gerou 19 casos. A verificacao com
+   combinacoes_de encontrou somente 61 triplas cobertas, em vez das 108.
+   Portanto, nesta versao da biblioteca, o argumento n=3 nao produziu um
+   conjunto que cobre todas as triplas. O resultado tambem nao poderia ser
+   suficiente com apenas 19 casos, pois sao necessarios pelo menos 36.
+
+   Exercicio 3
+
+a) A propriedade de ida e volta e:
+   para todo n em [1, 3999], de_romano(para_romano(n)) == n.
+   Ela falha na implementacao original; o Hypothesis encontrou n = 2,
+   para o qual para_romano(2) = "II", mas de_romano("II") = 1.
+
+b) Uma propriedade adicional e que todo numeral gerado deve obedecer a
+   gramatica canonica:
+   M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3}).
+   Essa propriedade nao enumera exemplos; ela impede repeticoes invalidas e
+   exige as formas subtrativas corretas.
+
+c) Depois de apagar .hypothesis e executar duas vezes, o contraexemplo da
+   ida e volta continuou sendo n = 2. Os contraexemplos da propriedade
+   canonica mudaram, mas todos produziam numerais terminados em "IIII", como
+   "LXXIIII". O defeito comum era a ausencia de (4, "IV") em SIMBOLOS.
+   A ida e volta tambem revelava que de_romano retornava dentro do laço.
+
+d) A ida e volta nao acusaria a ausencia de IV se somente os valores gerados
+   fossem aceitos como uma representacao nao canonica; por isso a propriedade
+   estrutural e necessaria. O modulo foi corrigido adicionando (4, "IV") e
+   movendo o return de de_romano para depois do laço.
